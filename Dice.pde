@@ -4,9 +4,8 @@ void setup() {
   noLoop();
 }
 int total;
-double colorDeterminer;
 void draw() {
-  // Create color specific total variables
+  // Create total variable
   background(200);
   total = 0;
   // Loop to create 81 dice in a square
