@@ -30,7 +30,7 @@ void mousePressed() {
   redraw();
 }
 // Draw a single dice class
-class Die {
+public class Die {
   int value, rotated;
   float myX, myY;
   Die(float x, float y) {
