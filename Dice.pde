@@ -9,13 +9,14 @@ void draw() {
   background(200);
   total = 0;
   // Loop to create 81 dice in a square
+  Die[] Dice = new Die[81]
   for (int i = 0;i < 9;i++) {
     for (int j = 0;j < 9;j++) {
-      Die dice = new Die(70*i+32.5,70*j+32.5);
-      dice.roll();
+      Die[9i+j+1] = new Die(70*i+32.5,70*j+32.5);
+      Die[9i+j+1].roll();
       // Show the dice
-      dice.show();
-      total += dice.value();
+      Die[9i+j+1].show();
+      total += Die[9i+j+1].value();
     }
   }
   // Write the totals below the dice
