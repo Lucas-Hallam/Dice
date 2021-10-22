@@ -4,12 +4,18 @@ void setup() {
   noLoop();
 }
 int total;
+void setup() {
+  // Draw the window
+  size(700,700);
+  noLoop();
+}
+int total;
+Die[] Dice = new Die[81];
 void draw() {
   // Create total variable
   background(200);
   total = 0;
   // Loop to create 81 dice in a square
-  Die[] Dice = new Die[81];
   for (int i = 0;i < 9;i++) {
     for (int j = 0;j < 9;j++) {
       Dice[9*i+j] = new Die(70*i+32.5,70*j+32.5);
