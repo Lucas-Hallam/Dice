@@ -2,8 +2,16 @@ void setup() {
   // Draw the window with a background color
   size(700,700);
   noLoop();
+  for (int i = 0;i < 9;i++) {
+    for (int j = 0;j < 9;j++) {
+      Dice[9*i+j]= new Die(70*i+32.5,70*j+32.5);
+    }
+  }
 }
 // How many dice are red, green or blue, remaining dice are white
+color blue = color(0,0,255);
+color red = color(255,0,0);
+color green = color(0,255,0);
 int blueDieMax = 27;
 int greenDieMax = 27;
 int redDieMax = 27;
@@ -18,6 +26,7 @@ int blueTotal;
 int greenTotal; 
 int redTotal;
 int whiteTotal;
+Die[] Dice = new Die[81];
 double colorDeterminer;
 void draw() {
   // Create color specific total variables
@@ -34,30 +43,27 @@ void draw() {
   // Loop to create 81 dice in a square
   for (int i = 0;i < 9;i++) {
     for (int j = 0;j < 9;j++) {
-      Die dice = new Die(70*i+32.5,70*j+32.5);
-      dice.roll();
+      Dice[9*i+j].roll();
       colorDeterminer = Math.random();
       // Determine the cotor of the dice and add their values to the respective totals
       if (colorDeterminer < (double) blueDie/(double) (blueDie+redDie+greenDie+whiteDie)) {
-        fill(0,0,255);
+        Dice[9*i+j].colorChange(blue);
         blueDie--;
-        blueTotal += dice.value();
+        blueTotal += Dice[9*i+j].value();
       } else if (colorDeterminer < (double) (blueDie+redDie)/(double) (blueDie+redDie+greenDie+whiteDie)) {
-        fill(255,0,0);
+        Dice[9*i+j].colorChange(green);
         redDie--;
-        redTotal += dice.value();
+        redTotal += Dice[9*i+j].value();
       } else if (colorDeterminer < (double) (blueDie+redDie+greenDie)/(double) (blueDie+redDie+greenDie+whiteDie)) {
-        fill(0,255,0);
+        Dice[9*i+j].colorChange(red);
         greenDie--;
-        greenTotal += dice.value();
+        greenTotal += Dice[9*i+j].value();
       } else {
-        fill(255);
-        whiteDie--;
-        whiteTotal += dice.value();
+        whiteTotal += Dice[9*i+j].value();
       }
       // Show the dice
-      dice.show();
-      total += dice.value();
+      Dice[9*i+j].show();
+      total += Dice[9*i+j].value();
     }
   }
   // Write the totals below the dice
@@ -73,10 +79,15 @@ void mousePressed() {
 class Die {
   int value, rotated;
   float myX, myY;
+  color myC;
   Die(float x, float y) {
     // Create a dice at (x,y) top left
     myX = x;
     myY = y;
+    myC = color(255,255,255);
+  }
+  void colorChange(color c) {
+    myC = c;
   }
   void roll() {
     // Roll the dice
@@ -85,6 +96,7 @@ class Die {
   }
   void show() {
     // Draw the dice with a random orientation for 2,3 and 6
+    fill(myC);
     rect(myX, myY, 65, 65, 10);
     fill(0);
     if (value == 1) {
@@ -141,3 +153,4 @@ class Die {
     return value;
   }
 }
+      
