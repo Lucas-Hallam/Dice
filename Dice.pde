@@ -2,12 +2,11 @@ void setup() {
   // Draw the window
   size(700,700);
   noLoop();
-}
-int total;
-void setup() {
-  // Draw the window
-  size(700,700);
-  noLoop();
+  for (int i = 0;i < 9;i++) {
+    for (int j = 0;j < 9;j++) {
+       Dice[9*i+j] = new Die(70*i+32.5,70*j+32.5);
+    }
+  }
 }
 int total;
 Die[] Dice = new Die[81];
@@ -18,7 +17,6 @@ void draw() {
   // Loop to create 81 dice in a square
   for (int i = 0;i < 9;i++) {
     for (int j = 0;j < 9;j++) {
-      Dice[9*i+j] = new Die(70*i+32.5,70*j+32.5);
       Dice[9*i+j].roll();
       // Show the dice
       Dice[9*i+j].show();
